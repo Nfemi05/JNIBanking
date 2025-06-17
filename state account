@@ -1,0 +1,28 @@
+else:
+        acc = st.session_state.account
+        st.subheader(f"Welcome, {acc.account_holder}")
+
+        tab1, tab2, tab3 = st.tabs(["Deposit", "Withdraw", "Balance"])
+
+        with tab1:
+            amount = st.number_input("Enter deposit amount (₦)", min_value=0.0, step=100.0)
+            if st.button("Deposit"):
+                success, message = acc.deposit(amount)
+                st.success(message) if success else st.error(message)
+
+        with tab2:
+            amount = st.number_input("Enter withdrawal amount (₦)", min_value=0.0, step=100.0, key="withdraw")
+            if st.button("Withdraw"):
+                success, message = acc.withdraw(amount)
+                st.success(message) if success else st.error(message)
+
+        with tab3:
+            st.info(acc.show_balance())
+
+        if st.button("🔁 Reset Account"):
+            st.session_state.account = None
+            st.rerun()
+
+
+if __name__ == "__main__":  # fixed check
+    main()

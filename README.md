@@ -1,2 +1,0 @@
-# JNIBanking
-Barka project 
