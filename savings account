@@ -1,0 +1,11 @@
+class SavingsAccount(Account):
+    WITHDRAWAL_LIMIT = 2_000_000  # ₦2 million
+
+    def withdraw(self, amount):
+        if amount > self.WITHDRAWAL_LIMIT:
+            return False, f"Cannot withdraw more than ₦{self.WITHDRAWAL_LIMIT:,} at a time."
+        elif amount > self.balance:
+            return False, "Insufficient balance."
+        else:
+            self.balance -= amount
+            return True, f"Withdrew ₦{amount:,}. New Balance: ₦{self.balance:,}"
