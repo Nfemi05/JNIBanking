@@ -1,0 +1,7 @@
+class CurrentAccount(Account):
+    def withdraw(self, amount):
+        if amount > self.balance:
+            return False, "Insufficient balance."
+        else:
+            self.balance -= amount
+            return True, f"Withdrew ₦{amount:,}. New Balance: ₦{self.balance:,}"
