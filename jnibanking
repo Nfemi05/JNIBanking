@@ -1,0 +1,20 @@
+# === STREAMLIT UI ===
+def main():
+    st.title("🏦 JNIBanking ")
+    if 'account' not in st.session_state:
+        st.session_state.account = None
+
+    if st.session_state.account is None:
+        st.subheader("Create an Account")
+        name = st.text_input("Enter your name")
+        acc_type = st.selectbox("Select Account Type", ["Savings", "Current"])
+        if st.button("Create Account"):
+            if not name:
+                st.error("Please enter your name.")
+            else:
+                if acc_type.lower() == "savings":
+                    st.session_state.account = SavingsAccount(name)
+                else:
+                    st.session_state.account = CurrentAccount(name)
+                st.success(f"{acc_type} Account created for {name}!")
+                st.rerun()
